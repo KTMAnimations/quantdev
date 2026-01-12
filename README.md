@@ -7,6 +7,7 @@ Monorepo scaffold based on `quantpad_recreation_guide.md`.
 - Copy env files:
   - `cp apps/web/.env.example apps/web/.env.local`
   - `cp apps/api/.env.example apps/api/.env`
+- Update `DATABASE_URL` in `apps/web/.env.local` + `apps/api/.env` (Homebrew Postgres typically uses your macOS username, e.g. `postgresql://kaivaid@localhost:5432/openquant`)
 - Start Postgres + Redis (Homebrew or Docker)
 - Install deps:
   - `npm install`
