@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { PropFirmLab } from "@/components/deploy/PropFirmLab";
 
 export default function DeployPage() {
   return (
@@ -12,14 +12,7 @@ export default function DeployPage() {
         </p>
       </div>
 
-      <Card>
-        <CardContent className="p-8">
-          <div className="text-text-secondary">
-            Simulator endpoint + UI comes next.
-          </div>
-        </CardContent>
-      </Card>
+      <PropFirmLab />
     </div>
   );
 }
-

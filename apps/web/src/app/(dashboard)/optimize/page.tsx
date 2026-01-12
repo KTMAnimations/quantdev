@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { RegressionLab } from "@/components/optimize/RegressionLab";
 
 export default function OptimizePage() {
   return (
@@ -12,14 +12,7 @@ export default function OptimizePage() {
         </p>
       </div>
 
-      <Card>
-        <CardContent className="p-8">
-          <div className="text-text-secondary">
-            Factor regression + interpretation UI comes next.
-          </div>
-        </CardContent>
-      </Card>
+      <RegressionLab />
     </div>
   );
 }
-

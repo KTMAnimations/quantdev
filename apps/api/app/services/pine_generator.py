@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from textwrap import dedent
 
+from app.utils.llm_client import LLMClient
+
 
 class PineGeneratorService:
     async def generate(self, description: str, kind: str) -> dict:
@@ -9,6 +11,33 @@ class PineGeneratorService:
         is_indicator = kind == "indicator"
 
         header = "//@version=5\n"
+        client = LLMClient()
+
+        prompt = dedent(
+            f"""
+            You are an expert TradingView Pine Script v5 developer.
+
+            Task: Write a Pine Script v5 {kind} from the description below.
+            - Output ONLY valid Pine Script (no markdown, no explanations).
+            - The script MUST start with: //@version=5
+            - Use clean inputs and sensible defaults.
+
+            Description:
+            {desc}
+            """
+        ).strip()
+
+        llm = await client.chat(prompt)
+        llm_reply = str(llm.get("reply", "")).strip()
+        if llm.get("backend") not in {"stub", "error"} and llm_reply:
+            code = llm_reply
+            if "```" in code:
+                code = code.replace("```pine", "").replace("```", "").strip()
+            if not code.startswith("//@version=5"):
+                code = header + code.lstrip()
+            notes = f"LLM-generated ({llm.get('backend')}, model={llm.get('model')})"
+            return {"kind": kind, "pine_code": code, "notes": notes}
+
         if is_indicator:
             code = header + dedent(
                 f"""
@@ -45,5 +74,4 @@ class PineGeneratorService:
                 """
             ).strip()
 
-        return {"kind": kind, "pine_code": code, "notes": "Template-based generator (replace with LLM/RAG)."}
-
+        return {"kind": kind, "pine_code": code, "notes": "Template-based generator (LLM disabled/unavailable)."}

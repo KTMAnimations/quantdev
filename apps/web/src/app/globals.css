@@ -1,6 +1,23 @@
 @import "tailwindcss";
 
 :root {
+  /* QuantPad exact tokens (quantdev_review.md) */
+  --qp-bg-primary: #0a0a0f;
+  --qp-bg-secondary: #111118;
+  --qp-bg-tertiary: #1a1a24;
+
+  --qp-violet: #8b5cf6;
+  --qp-violet-light: #a78bfa;
+  --qp-violet-dark: #7c3aed;
+  --qp-violet-glow: rgba(139, 92, 246, 0.2);
+
+  --qp-text-primary: #ffffff;
+  --qp-text-secondary: #a1a1aa;
+  --qp-text-muted: #71717a;
+
+  --qp-border: #27272a;
+  --qp-border-light: #3f3f46;
+
   --background-primary: #0a0a0f;
   --background-secondary: #111118;
   --background-tertiary: #1a1a24;
@@ -66,6 +83,19 @@
   --color-border-primary: var(--border-primary);
   --color-border-secondary: var(--border-secondary);
 
+  --color-qp-bg-primary: var(--qp-bg-primary);
+  --color-qp-bg-secondary: var(--qp-bg-secondary);
+  --color-qp-bg-tertiary: var(--qp-bg-tertiary);
+  --color-qp-violet: var(--qp-violet);
+  --color-qp-violet-light: var(--qp-violet-light);
+  --color-qp-violet-dark: var(--qp-violet-dark);
+  --color-qp-violet-glow: var(--qp-violet-glow);
+  --color-qp-text-primary: var(--qp-text-primary);
+  --color-qp-text-secondary: var(--qp-text-secondary);
+  --color-qp-text-muted: var(--qp-text-muted);
+  --color-qp-border: var(--qp-border);
+  --color-qp-border-light: var(--qp-border-light);
+
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
 }
@@ -89,4 +119,28 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0.1;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) rotate(1deg);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-10px) translateX(-10px) rotate(-1deg);
+    opacity: 0.1;
+  }
+  75% {
+    transform: translateY(-30px) translateX(5px) rotate(0.5deg);
+    opacity: 0.12;
+  }
+}
+
+.animate-float {
+  animation: float 25s ease-in-out infinite;
 }

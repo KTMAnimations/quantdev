@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 const FORMULAS = [
   "S = (Rp - Rf) / σp",
   "σ = √(Σ(xi - μ)² / N)",
@@ -17,25 +15,8 @@ const FORMULAS = [
   "R² = 1 - (SSres/SStot)",
   "ρ = Cov(X,Y) / σxσy",
   "IR = (Rp - Rb) / σ(Rp - Rb)",
+  "∫Σ∂∞μλ$%",
 ];
-
-type FormulaMotion = {
-  id: number;
-  formula: string;
-  initial: { x: string; y: string; opacity: number };
-  animate: {
-    x: string[];
-    y: string[];
-    opacity: number[];
-    rotate: number[];
-  };
-  transition: {
-    duration: number;
-    repeat: number;
-    delay: number;
-    ease: "linear";
-  };
-};
 
 function hashToSeed(input: string): number {
   let h = 2166136261;
@@ -56,43 +37,36 @@ function mulberry32(seed: number) {
 }
 
 export function FloatingFormulas() {
-  const items: FormulaMotion[] = FORMULAS.map((formula, i) => {
+  const items = FORMULAS.map((formula, i) => {
     const rand = mulberry32(hashToSeed(`${i}:${formula}`));
-    const randPct = () => `${rand() * 100}%`;
-    const randRotate = () => rand() * 10 - 5;
-    const randDuration = () => 20 + rand() * 20;
+    const pct = () => `${rand() * 100}%`;
+    const duration = () => `${20 + rand() * 10}s`;
 
     return {
       id: i,
       formula,
-      initial: { x: randPct(), y: randPct(), opacity: 0 },
-      animate: {
-        x: [randPct(), randPct(), randPct()],
-        y: [randPct(), randPct(), randPct()],
-        opacity: [0.1, 0.3, 0.1],
-        rotate: [0, randRotate(), 0],
-      },
-      transition: {
-        duration: randDuration(),
-        repeat: Infinity,
-        delay: i * 0.5,
-        ease: "linear",
-      },
+      left: pct(),
+      top: pct(),
+      delay: `${i * 2}s`,
+      duration: duration(),
     };
   });
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
       {items.map((item) => (
-        <motion.div
+        <div
           key={item.id}
-          className="absolute font-mono text-sm text-text-muted/30 whitespace-nowrap"
-          initial={item.initial}
-          animate={item.animate}
-          transition={item.transition}
+          className="absolute text-qp-violet/10 text-sm md:text-base font-mono whitespace-nowrap animate-float"
+          style={{
+            left: item.left,
+            top: item.top,
+            animationDelay: item.delay,
+            animationDuration: item.duration,
+          }}
         >
           {item.formula}
-        </motion.div>
+        </div>
       ))}
     </div>
   );

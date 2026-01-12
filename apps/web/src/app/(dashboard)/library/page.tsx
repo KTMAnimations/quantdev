@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { LibraryBrowser } from "@/components/library/LibraryBrowser";
 
 export default function LibraryPage() {
   return (
@@ -12,14 +12,7 @@ export default function LibraryPage() {
         </p>
       </div>
 
-      <Card>
-        <CardContent className="p-8">
-          <div className="text-text-secondary">
-            Prisma models + browse UI comes next.
-          </div>
-        </CardContent>
-      </Card>
+      <LibraryBrowser />
     </div>
   );
 }
-

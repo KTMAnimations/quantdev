@@ -30,7 +30,7 @@ export function PineGenerateForm() {
     setResult(null);
 
     startTransition(async () => {
-      const res = await fetch("/api/pine/generate", {
+      const res = await fetch("/api/code/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ description, kind }),

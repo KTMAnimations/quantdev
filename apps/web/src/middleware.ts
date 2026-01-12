@@ -15,6 +15,6 @@ export const config = {
     "/deploy/:path*",
     "/library/:path*",
     "/copilot/:path*",
+    "/quant-copilot/:path*",
   ],
 };
-

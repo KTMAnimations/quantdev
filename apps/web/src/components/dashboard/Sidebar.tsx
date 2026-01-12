@@ -21,7 +21,7 @@ const NAV = [
   { href: "/optimize", label: "Optimize", icon: Settings2 },
   { href: "/deploy", label: "Deploy", icon: Rocket },
   { href: "/library", label: "Library", icon: Library },
-  { href: "/copilot", label: "Copilot", icon: MessageSquare },
+  { href: "/quant-copilot", label: "Quant Copilot", icon: MessageSquare },
 ];
 
 export function Sidebar() {
@@ -59,4 +59,3 @@ export function Sidebar() {
     </aside>
   );
 }
-

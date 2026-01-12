@@ -105,3 +105,27 @@ class PropFirmResponse(BaseModel):
     breakeven_rate: float
     details: dict[str, Any]
 
+
+class BootstrapRequest(BaseModel):
+    series: list[float] = Field(min_length=10)
+    statistic: Literal["mean", "median"] = "mean"
+    confidence_level: float = Field(default=0.95, ge=0.5, le=0.999)
+    n_resamples: int = Field(default=10000, ge=100, le=200000)
+    seed: int | None = None
+
+
+class BootstrapResponse(BaseModel):
+    statistic: str
+    estimate: float
+    ci_low: float
+    ci_high: float
+
+
+class QuantCopilotChatRequest(BaseModel):
+    message: str = Field(min_length=1)
+
+
+class QuantCopilotChatResponse(BaseModel):
+    reply: str
+    backend: str
+    model: str | None = None

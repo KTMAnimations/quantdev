@@ -43,7 +43,7 @@ export function IdeationForm() {
     setResult(null);
 
     startTransition(async () => {
-      const res = await fetch("/api/ideation/analyze", {
+      const res = await fetch("/api/ideation/test-signal", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ description, symbol, timeframe }),
@@ -148,4 +148,3 @@ export function IdeationForm() {
     </div>
   );
 }
-

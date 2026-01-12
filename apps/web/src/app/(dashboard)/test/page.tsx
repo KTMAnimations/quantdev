@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { TradingChart } from "@/components/charts/TradingChart";
 import { EquityCurve } from "@/components/charts/EquityCurve";
+import { SimulationLab } from "@/components/test/SimulationLab";
 
 const CANDLES = [
   { time: "2025-01-02", open: 100, high: 102, low: 99, close: 101 },
@@ -49,6 +50,8 @@ export default function TestPage() {
           </CardContent>
         </Card>
       </div>
+
+      <SimulationLab equityCurve={EQUITY} />
     </div>
   );
 }
